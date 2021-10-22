@@ -1,7 +1,7 @@
-require 'clip'
+require "clip"
 
-gif = GifReader.new("C:/Users/ongaeshi/Downloads/animated-2.gif")
-scale = 0.3
+gif = GifReader.new("C:/Users/ongaeshi/Code/GifDrawer/resource/hello3.gif")
+scale = 1
 
 font = Font.new(40)
 
@@ -18,7 +18,7 @@ script do |root|
   g.play
   root.wait 1
   g.stop
-  root.text(font, 99, 229, color: "black", text:"LGTM")
+  root.text(font, 99, 229, color: "black", text: "LGTM")
   root.wait 0.5
   g.play
 end
