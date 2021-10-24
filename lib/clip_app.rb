@@ -46,5 +46,9 @@ module Clip
     def self.run(&block)
       $clip_manager.run(&block)
     end
+
+    def self.reset
+      $clip_manager.reset
+    end
   end
 end

@@ -41,6 +41,14 @@ module Clip
       BlockClip.new(root, &block)
     end
 
+    def reset
+      @time = 0
+
+      root.children.each do |c|
+        c.reset
+      end
+    end
+
     def run(&block)
       # Calculate first delta time
       delta_time = if @start_time > 0 || @is_stop
@@ -69,11 +77,7 @@ module Clip
         root.draw
 
         if @time > @end_time && @is_loop
-          @time = 0
-
-          root.children.each do |c|
-            c.reset
-          end
+          reset
         end
 
         prev_time = @time
@@ -87,12 +91,8 @@ module Clip
 
         if @is_stop
           if @time < prev_time
-            root.children.each do |c|
-              c.reset
-            end
-
             delta_time = @time
-            @time = 0.0
+            reset
           else
             delta_time = @time - prev_time
             @time -= delta_time
