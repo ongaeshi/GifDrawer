@@ -15,6 +15,15 @@ class LineWithTime
     @point = point
     @delta = delta
   end
+
+  def draw(parent)
+    parent.line(
+      point.x, point.y,
+      point.x - delta.x, point.y - delta.y,
+      thickness: 8,
+      color: "orange"
+    )
+  end
 end
 
 def draw_mosaic(clip, color1, color2)
@@ -46,16 +55,9 @@ script do |root|
 
   loop do
     (current_index...line_with_times.count).each do |i|
-      e = line_with_times[i]
-
-      break if e.time > App.time
-
-      root.line(
-        e.point.x, e.point.y,
-        e.point.x - e.delta.x, e.point.y - e.delta.y,
-        thickness: 8,
-        color: "orange"
-      )
+      line = line_with_times[i]
+      break if line.time > App.time
+      line.draw(root)
       current_index += 1
     end
 
@@ -78,16 +80,9 @@ App.run do
   end
 
   if MouseL.pressed
-    e = LineWithTime.new(App.time, Cursor.pos, MouseL.down ? Vec2.new(0,0) : Cursor.delta)
-
-    root_script.line(
-      e.point.x, e.point.y,
-      e.point.x - e.delta.x, e.point.y - e.delta.y,
-      thickness: 8,
-      color: "orange"
-    )
-
-    line_with_times.push(e)
+    line = LineWithTime.new(App.time, Cursor.pos, MouseL.down ? Vec2.new(0,0) : Cursor.delta)
+    line.draw(root_script)
+    line_with_times.push(line)
     line_with_times = line_with_times.sort_by { |e| e.time }
   end
 end
