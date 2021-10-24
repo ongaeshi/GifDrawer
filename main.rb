@@ -19,8 +19,8 @@ end
 def draw_mosaic(clip, color1, color2)
   Drawer.background(color1)
 
-  (0..(App.width/40)).each do |x|
-    (0..(App.height/40)).each do |y|
+  (0..(App.width / 40)).each do |x|
+    (0..(App.height / 40)).each do |y|
       if (x + y) % 2 == 1
         clip.rect(x * 40, y * 40, 40, 40, color: color2)
       end
