@@ -3,8 +3,18 @@ require "clip"
 
 SCALE = 1
 gif_reader = nil
+line_with_times = []
 
-App.window_size(320, 180)
+# ---
+class LineWithTime
+  attr_reader :time, :point, :delta
+
+  def initialize(time, point, delta)
+    @time = time
+    @point = point
+    @delta = delta
+  end
+end
 
 def draw_mosaic(clip, color1, color2)
   Drawer.background(color1)
@@ -17,6 +27,9 @@ def draw_mosaic(clip, color1, color2)
     end
   end
 end
+
+# ---
+App.window_size(320, 180)
 
 script do |root|
   draw_mosaic(root, "gray", "silver")
@@ -34,6 +47,7 @@ App.run do
 
     if gif_path.end_with?(".gif")
       gif_reader = GifReader.new(gif_path)
+      line_with_times = []
       App.window_size(gif_reader.width * SCALE, gif_reader.height * SCALE)
       App.end_time = gif_reader.duration
       App.reset
@@ -42,6 +56,12 @@ App.run do
   end
 
   if MouseL.pressed
-    puts "#{App.time}, #{Cursor.pos.x}, #{Cursor.pos.y}"
+    line_with_times.push(LineWithTime.new(App.time, Cursor.pos, Cursor.delta))
+    line_with_times = line_with_times.sort_by { |e| e.time }
+
+    # clear
+    # line_with_times.each do |e|
+    #   puts "#{e.time}: #{e.point.x}, #{e.point.y}, #{e.delta.x}, #{e.delta.y}"
+    # end
   end
 end
