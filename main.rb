@@ -50,7 +50,7 @@ script do |root|
       if App.time >= e.time
         root.line(
           e.point.x, e.point.y,
-          e.point.x + e.delta.x, e.point.y + e.delta.y,
+          e.point.x - e.delta.x, e.point.y - e.delta.y,
           thickness: 8,
           color: "orange"
         )
