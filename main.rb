@@ -77,11 +77,11 @@ App.run do
   end
 
   if MouseL.pressed
-    e = LineWithTime.new(App.time, Cursor.pos, Cursor.delta)
+    e = LineWithTime.new(App.time, Cursor.pos, MouseL.down ? Vec2.new(0,0) : Cursor.delta)
 
     root_script.line(
       e.point.x, e.point.y,
-      e.point.x + e.delta.x, e.point.y + e.delta.y,
+      e.point.x - e.delta.x, e.point.y - e.delta.y,
       thickness: 8,
       color: "orange"
     )
