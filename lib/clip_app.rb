@@ -43,8 +43,8 @@ module Clip
       $clip_manager.end_time = time
     end
 
-    def self.run
-      $clip_manager.run
+    def self.run(&block)
+      $clip_manager.run(&block)
     end
   end
 end

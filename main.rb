@@ -1,26 +1,43 @@
 require "clip"
 
-gif = GifReader.new("C:/Users/ongaeshi/Code/GifDrawer/resource/hello3.gif")
+current_path = nil
 scale = 1
 
-font = Font.new(40)
+App.window_size(320, 180)
+Drawer.background("gray")
 
-App.window_size(gif.width * scale, gif.height * scale)
-App.end_time = gif.duration + 0.5
+# script do |root|
+#   loop do
+#     if !$dropped_file_path.nil?
+#       current_path = $dropped_file_path
+#       $dropped_file_path = nil
+#       gif_reader = GifReader.new(current_path)
+#       gif = root.gif(gif_reader)
+#       App.window_size(gif_reader.width * scale, gif_reader.height * scale)
+#       App.end_time = gif_reader.duration
+#     end
 
-# script do
-#   Drawer.background("gray")
+#     root.wait_delta
+#   end
 # end
 
-script do |root|
-  g = root.gif(gif)
-  g.scale(scale, scale)
-  g.play
-  root.wait 1
-  g.stop
-  root.text(font, 99, 229, color: "black", text: "LGTM")
-  root.wait 0.5
-  g.play
-end
+# if current_path.nil? && !$dropped_file_path.nil?
+#   current_path = $dropped_file_path
+#   gif = GifReader.new(current_path)
+#   App.window_size(gif.width * scale, gif.height * scale)
+#   App.end_time = gif.duration + 0.5
 
-App.run
+#   script do |root|
+#     p gif
+#     g = root.gif(gif)
+#     g.scale(scale, scale)
+#     g.play
+#   end
+# end
+
+App.run do
+  if DragDrop.has_new_file_paths
+    $dropped_file_path = DragDrop.get_dropped_file_path
+    p $dropped_file_path
+  end
+end

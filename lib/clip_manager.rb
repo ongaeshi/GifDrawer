@@ -41,7 +41,7 @@ module Clip
       BlockClip.new(root, &block)
     end
 
-    def run
+    def run(&block)
       # Calculate first delta time
       delta_time = if @start_time > 0 || @is_stop
         @start_time
@@ -53,6 +53,8 @@ module Clip
       root.update(0)
 
       while System.update
+        block.call(self) if block
+
         # Divide into small time and execute update
         t = delta_time == 0 ? 0 : min_delta_time
         total_delta_time = 0
