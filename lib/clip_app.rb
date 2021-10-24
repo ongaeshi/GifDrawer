@@ -27,6 +27,14 @@ module Clip
   }
 
   class App
+    def self.width
+      $clip_manager.width
+    end
+
+    def self.height
+      $clip_manager.height
+    end
+
     def self.window_size(x, y)
       $clip_manager.window_size(x, y)
     end
