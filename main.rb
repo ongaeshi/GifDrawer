@@ -47,15 +47,16 @@ script do |root|
   loop do
     (current_index...line_with_times.count).each do |i|
       e = line_with_times[i]
-      if App.time >= e.time
-        root.line(
-          e.point.x, e.point.y,
-          e.point.x - e.delta.x, e.point.y - e.delta.y,
-          thickness: 8,
-          color: "orange"
-        )
-        current_index += 1
-      end
+
+      break if e.time > App.time
+
+      root.line(
+        e.point.x, e.point.y,
+        e.point.x - e.delta.x, e.point.y - e.delta.y,
+        thickness: 8,
+        color: "orange"
+      )
+      current_index += 1
     end
 
     root.wait_delta
