@@ -40,4 +40,8 @@ App.run do
       App.is_stop = false
     end
   end
+
+  if MouseL.pressed
+    puts "#{App.time}, #{Cursor.pos.x}, #{Cursor.pos.y}"
+  end
 end

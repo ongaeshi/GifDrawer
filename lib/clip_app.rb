@@ -27,6 +27,10 @@ module Clip
   }
 
   class App
+    def self.time
+      $clip_manager.time
+    end
+
     def self.width
       $clip_manager.width
     end
