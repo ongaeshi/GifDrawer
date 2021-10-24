@@ -1,3 +1,4 @@
+CLIP_MANAGER_IS_STOP = true # 起動時に再生停止
 require "clip"
 
 SCALE = 1
@@ -23,6 +24,7 @@ App.run do
       App.window_size($gif_reader.width * SCALE, $gif_reader.height * SCALE)
       App.end_time = $gif_reader.duration
       App.reset
+      App.is_stop = false
     end
   end
 end
