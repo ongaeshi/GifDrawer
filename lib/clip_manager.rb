@@ -3,7 +3,7 @@ require "clip_object"
 module Clip
   class ClipManager
     attr_reader :root, :time, :width, :height
-    attr_accessor :start_time, :end_time, :is_stop, :is_loop, :is_hidden
+    attr_accessor :start_time, :end_time, :is_stop, :is_loop, :is_hidden, :min_delta_rate
 
     def initialize(start_time = nil, is_stop = nil, is_loop = nil)
       @root = RootClip.new
@@ -15,6 +15,7 @@ module Clip
       @is_hidden = false
       @width = 800
       @height = 600
+      @min_delta_rate = 1
     end
 
     def window_size(x, y)
@@ -101,6 +102,12 @@ module Clip
           delta_time = min_delta_time
         end
       end
+    end
+
+    MIN_DELTA_BASE = (1.0 / 60) # Assume 60fps
+
+    def min_delta_time
+      MIN_DELTA_BASE * @min_delta_rate
     end
   end
 
