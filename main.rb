@@ -32,12 +32,31 @@ end
 App.window_size(320, 180)
 
 script do |root|
+  current_index = 0
+
   draw_mosaic(root, "gray", "silver")
 
   if gif_reader
     gif = root.gif(gif_reader)
     gif.scale(SCALE, SCALE)
     gif.play
+  end
+
+  loop do
+    (current_index...line_with_times.count).each do |i|
+      e = line_with_times[i]
+      if App.time >= e.time
+        root.line(
+          e.point.x, e.point.y,
+          e.point.x + e.delta.x, e.point.y + e.delta.y,
+          thickness: 8,
+          color: "orange"
+        )
+        current_index += 1
+      end
+    end
+
+    root.wait_delta
   end
 end
 
@@ -58,10 +77,5 @@ App.run do
   if MouseL.pressed
     line_with_times.push(LineWithTime.new(App.time, Cursor.pos, Cursor.delta))
     line_with_times = line_with_times.sort_by { |e| e.time }
-
-    # clear
-    # line_with_times.each do |e|
-    #   puts "#{e.time}: #{e.point.x}, #{e.point.y}, #{e.delta.x}, #{e.delta.y}"
-    # end
   end
 end
