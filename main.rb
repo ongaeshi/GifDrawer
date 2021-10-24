@@ -20,7 +20,7 @@ class LineWithTime
     parent.line(
       point.x, point.y,
       point.x - delta.x, point.y - delta.y,
-      thickness: 8,
+      thickness: 6,
       color: "orange"
     )
   end
@@ -81,7 +81,7 @@ App.run do
 
   if MouseL.pressed
     line = LineWithTime.new(App.time, Cursor.pos, MouseL.down ? Vec2.new(0,0) : Cursor.delta)
-    line.draw(root_script)
+    line.draw(root_script)  # TODO: 書いているときだけ多重描画されている。半透明だと問題が起きる。
     line_with_times.push(line)
     line_with_times = line_with_times.sort_by { |e| e.time }
   end
