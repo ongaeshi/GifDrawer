@@ -16,6 +16,7 @@ $ git clone https://github.com/ongaeshi/GifDrawer.git
 2. 再生/停止、スロー再生、コマ送り
 3. マウスの左ボタンドラッグで線を書く
 4. 書いた線はタイムラインと連動してアニメーションに
+5. 作成したアニメーションはWindows標準の画面録画や[ScreenToGif](https://www.screentogif.com/)を使って保存することができます
 
 ![hello_with_draw_making.gif](resource/hello_with_draw_making.gif)
 
