@@ -20,7 +20,7 @@ class LineWithTime
     parent.line(
       point.x, point.y,
       point.x - delta.x, point.y - delta.y,
-      thickness: 6,
+      thickness: 4,
       color: "orange"
     )
   end
