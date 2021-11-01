@@ -1,6 +1,7 @@
 CLIP_MANAGER_IS_STOP = true # 起動時に再生停止
 require "clip"
 
+DEFAULT_END_TIME = 30
 SCALE = 1
 gif_reader = nil
 texture = nil
@@ -22,7 +23,7 @@ class LineWithTime
       point.x, point.y,
       point.x - delta.x, point.y - delta.y,
       thickness: 4,
-      color: "black"
+      color: "black" # "orange"
     )
   end
 end
@@ -40,13 +41,15 @@ def draw_mosaic(clip, color1, color2)
 end
 
 # ---
-App.window_size(320, 180)
+App.window_size(640, 360)
+App.end_time = DEFAULT_END_TIME
 
 script do |root|
   current_index = 0
   root_script = root
 
-  draw_mosaic(root, "gray", "silver")
+  # draw_mosaic(root, "gray", "silver")
+  Drawer.background("silver")
 
   if gif_reader
     gif = root.gif(gif_reader)
@@ -78,11 +81,11 @@ App.run do
     if file_path.end_with?(".gif")
       gif_reader = GifReader.new(file_path)
       App.window_size(gif_reader.width * SCALE, gif_reader.height * SCALE)
-      App.end_time = gif_reader.duration > 0 ? gif_reader.duration : 10
+      App.end_time = gif_reader.duration > 0 ? gif_reader.duration : DEFAULT_END_TIME
     else
       texture = Texture.new(file_path)
       App.window_size(texture.width * SCALE, texture.height * SCALE)
-      App.end_time = 10
+      App.end_time = DEFAULT_END_TIME
     end
 
     App.reset
@@ -96,4 +99,3 @@ App.run do
     line_with_times = line_with_times.sort_by { |e| e.time }
   end
 end
-
