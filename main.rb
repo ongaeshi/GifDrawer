@@ -3,6 +3,7 @@ require "clip"
 
 SCALE = 1
 gif_reader = nil
+texture = nil
 root_script = nil
 line_with_times = []
 
@@ -21,7 +22,7 @@ class LineWithTime
       point.x, point.y,
       point.x - delta.x, point.y - delta.y,
       thickness: 4,
-      color: "orange"
+      color: "black"
     )
   end
 end
@@ -51,6 +52,8 @@ script do |root|
     gif = root.gif(gif_reader)
     gif.scale(SCALE, SCALE)
     gif.play
+  elsif texture
+    root.texture(texture, 0, 0)
   end
 
   loop do
@@ -67,16 +70,23 @@ end
 
 App.run do
   if DragDrop.has_new_file_paths
-    gif_path = DragDrop.get_dropped_file_path
+    file_path = DragDrop.get_dropped_file_path
 
-    if gif_path.end_with?(".gif")
-      gif_reader = GifReader.new(gif_path)
-      line_with_times = []
+    gif_reader = texture = nil
+    line_with_times = []
+
+    if file_path.end_with?(".gif")
+      gif_reader = GifReader.new(file_path)
       App.window_size(gif_reader.width * SCALE, gif_reader.height * SCALE)
-      App.end_time = gif_reader.duration
-      App.reset
-      App.is_stop = false
+      App.end_time = gif_reader.duration > 0 ? gif_reader.duration : 10
+    else
+      texture = Texture.new(file_path)
+      App.window_size(texture.width * SCALE, texture.height * SCALE)
+      App.end_time = 10
     end
+
+    App.reset
+    App.is_stop = false
   end
 
   if MouseL.pressed
@@ -86,3 +96,4 @@ App.run do
     line_with_times = line_with_times.sort_by { |e| e.time }
   end
 end
+
