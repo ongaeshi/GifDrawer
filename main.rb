@@ -13,10 +13,11 @@ dynamic_texture = nil
 class LineWithTime
   attr_reader :time, :point, :delta
 
-  def initialize(time, point, delta)
+  def initialize(time, point, delta, is_eraser = false)
     @time = time
     @point = point
     @delta = delta
+    @is_eraser = is_eraser
   end
 
   def draw(image)
@@ -24,9 +25,17 @@ class LineWithTime
       image,
       point.x, point.y,
       point.x - delta.x, point.y - delta.y,
-      4,
-      "black" # "orange"
+      thickness,
+      color
     )
+  end
+
+  def thickness
+    @is_eraser ? 32 : 4
+  end
+
+  def color
+    @is_eraser ? [255, 255, 255, 0] : "black" # "orang"
   end
 end
 
@@ -97,21 +106,14 @@ App.run do
   end
 
   if dynamic_texture
-    if MouseR.pressed
-      point = Cursor.pos
-      delta = MouseR.down ? Vec2.new(0,0) : Cursor.delta
-
-      Drawer.line_to_image(
-        dynamic_texture.image,
-        point.x, point.y,
-        point.x - delta.x, point.y - delta.y,
-        32,
-        [255, 255, 255, 0]
-      )
-
-      dynamic_texture.image_to_texture
-    elsif MouseL.pressed
-      line = LineWithTime.new(App.time, Cursor.pos, MouseL.down ? Vec2.new(0,0) : Cursor.delta)
+    if MouseR.pressed || MouseL.pressed
+      is_eraser = MouseR.pressed
+      line = LineWithTime.new(
+        App.time,
+        Cursor.pos,
+        MouseL.down ? Vec2.new(0,0) : Cursor.delta,
+        is_eraser
+        )
       line.draw(dynamic_texture.image)  # TODO: 書いているときだけ多重描画されている。半透明だと問題が起きる。
       line_with_times.push(line)
       line_with_times = line_with_times.sort_by { |e| e.time }
