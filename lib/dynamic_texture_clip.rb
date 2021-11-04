@@ -11,7 +11,7 @@ module Clip
     end
 
     def image_to_texture
-      @teture.fill(@image)
+      @texture.fill(@image)
     end
 
     def draw
