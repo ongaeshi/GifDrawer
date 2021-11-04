@@ -7,6 +7,7 @@ gif_reader = nil
 texture = nil
 root_script = nil
 line_with_times = []
+dynamic_texture = nil
 
 # ---
 class LineWithTime
@@ -18,12 +19,13 @@ class LineWithTime
     @delta = delta
   end
 
-  def draw(parent)
-    parent.line(
+  def draw(image)
+    Drawer.line_to_image(
+      image,
       point.x, point.y,
       point.x - delta.x, point.y - delta.y,
-      thickness: 4,
-      color: "black" # "orange"
+      4,
+      "black" # "orange"
     )
   end
 end
@@ -59,14 +61,16 @@ script do |root|
     root.texture(texture, 0, 0)
   end
 
+  dynamic_texture = root.dynamic_texture(App.width, App.height, [255, 255, 255, 0])
+
   loop do
     (current_index...line_with_times.count).each do |i|
       line = line_with_times[i]
       break if line.time > App.time
-      line.draw(root)
+      line.draw(dynamic_texture.image)
       current_index += 1
     end
-
+    dynamic_texture.image_to_texture
     root.wait_delta
   end
 end
@@ -92,10 +96,11 @@ App.run do
     App.is_stop = false
   end
 
-  if MouseL.pressed
+  if dynamic_texture && MouseL.pressed
     line = LineWithTime.new(App.time, Cursor.pos, MouseL.down ? Vec2.new(0,0) : Cursor.delta)
-    line.draw(root_script)  # TODO: 書いているときだけ多重描画されている。半透明だと問題が起きる。
+    line.draw(dynamic_texture.image)  # TODO: 書いているときだけ多重描画されている。半透明だと問題が起きる。
     line_with_times.push(line)
     line_with_times = line_with_times.sort_by { |e| e.time }
+    dynamic_texture.image_to_texture
   end
 end
