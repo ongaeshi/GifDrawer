@@ -111,12 +111,16 @@ App.run do
       line = LineWithTime.new(
         App.time,
         Cursor.pos,
-        MouseL.down ? Vec2.new(0,0) : Cursor.delta,
+        MouseL.down ? Vec2.new(0, 0) : Cursor.delta,
         is_eraser
         )
       line.draw(dynamic_texture.image)  # TODO: 書いているときだけ多重描画されている。半透明だと問題が起きる。
-      line_with_times.push(line)
-      line_with_times = line_with_times.sort_by { |e| e.time }
+      index = line_with_times.index { |e| line.time < e.time }
+      if index.nil?
+        line_with_times.push(line)
+      else
+        line_with_times.insert(index, line)
+      end
       dynamic_texture.image_to_texture
     end
   end
