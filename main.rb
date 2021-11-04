@@ -115,7 +115,7 @@ App.run do
         is_eraser
         )
       line.draw(dynamic_texture.image)  # TODO: 書いているときだけ多重描画されている。半透明だと問題が起きる。
-      index = line_with_times.index { |e| line.time < e.time }
+      index = line_with_times.bsearch_index { |e| line.time < e.time }
       if index.nil?
         line_with_times.push(line)
       else
