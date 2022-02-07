@@ -1,7 +1,7 @@
 CLIP_MANAGER_IS_STOP = true # 起動時に再生停止
 require "clip"
 
-DEFAULT_END_TIME = 30
+DEFAULT_END_TIME = 5
 SCALE = 1
 gif_reader = nil
 texture = nil
