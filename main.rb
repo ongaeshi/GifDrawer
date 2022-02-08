@@ -1,7 +1,40 @@
+# 調整用パラメータ
+
+# ペンの色
+# PEN_COLOR = "navy"
+# PEN_COLOR = "blue"
+# PEN_COLOR = "aqua"
+# PEN_COLOR = "teal"
+# PEN_COLOR = "olive"
+# PEN_COLOR = "green"
+# PEN_COLOR = "lime"
+# PEN_COLOR = "yellow"
+# PEN_COLOR = "orange"
+PEN_COLOR = "red"
+# PEN_COLOR = "fuchsia"
+# PEN_COLOR = "purple"
+# PEN_COLOR = "maroon"
+# PEN_COLOR = "white"
+# PEN_COLOR = "silver"
+# PEN_COLOR = "gray"
+# PEN_COLOR = "black"
+
+# ペンの太さ
+PEN_THICKNESS = 2
+
+# 消しゴムの太さ
+ERASER_THICKNESS = 32
+
+# gifアニメが未設定のときの終了時間
+DEFAULT_END_TIME = 5
+
+# スローボタン(🐢)を押したときの再生レート(小さいほど遅くなる)
+CLIP_MANAGER_SLOW_DELTA_RATE = 0.25
+
+# ---
 CLIP_MANAGER_IS_STOP = true # 起動時に再生停止
 require "clip"
 
-DEFAULT_END_TIME = 5
 SCALE = 1
 gif_reader = nil
 texture = nil
@@ -31,11 +64,11 @@ class LineWithTime
   end
 
   def thickness
-    @is_eraser ? 32 : 4
+    @is_eraser ? ERASER_THICKNESS : PEN_THICKNESS
   end
 
   def color
-    @is_eraser ? [255, 255, 255, 0] : "black" # "orang"
+    @is_eraser ? [255, 255, 255, 0] : PEN_COLOR
   end
 end
 
