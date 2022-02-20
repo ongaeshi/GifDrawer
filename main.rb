@@ -141,20 +141,22 @@ App.run do
   if dynamic_texture
     if MouseR.pressed || MouseL.pressed
       is_eraser = MouseR.pressed
-      line = LineWithTime.new(
-        App.time,
-        Cursor.pos,
-        MouseL.down ? Vec2.new(0, 0) : Cursor.delta,
-        is_eraser
+      if Cursor.delta.x != 0 || Cursor.delta.y != 0 || MouseL.down || MouseR.down
+        line = LineWithTime.new(
+          App.time,
+          Cursor.pos,
+          MouseL.down ? Vec2.new(0, 0) : Cursor.delta,
+          is_eraser
         )
-      line.draw(dynamic_texture.image)  # TODO: 書いているときだけ多重描画されている。半透明だと問題が起きる。
-      index = line_with_times.bsearch_index { |e| line.time < e.time }
-      if index.nil?
-        line_with_times.push(line)
-      else
-        line_with_times.insert(index, line)
+        line.draw(dynamic_texture.image)  # TODO: 書いているときだけ多重描画されている。半透明だと問題が起きる。
+        index = line_with_times.bsearch_index { |e| line.time < e.time }
+        if index.nil?
+          line_with_times.push(line)
+        else
+          line_with_times.insert(index, line)
+        end
+        dynamic_texture.image_to_texture
       end
-      dynamic_texture.image_to_texture
     end
   end
 end
