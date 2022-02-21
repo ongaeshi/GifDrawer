@@ -93,7 +93,8 @@ script do |root|
   root_script = root
 
   # draw_mosaic(root, "gray", "silver")
-  Drawer.background("silver")
+  # Drawer.background("silver")
+  Drawer.background([243, 245, 250])
 
   if gif_reader
     gif = root.gif(gif_reader)
