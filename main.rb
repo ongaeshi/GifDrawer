@@ -46,10 +46,11 @@ dynamic_texture = nil
 class LineWithTime
   attr_reader :time, :point, :delta
 
-  def initialize(time, point, delta, is_eraser = false)
+  def initialize(time, point, delta, pen_color, is_eraser = false)
     @time = time
     @point = point
     @delta = delta
+    @pen_color = pen_color
     @is_eraser = is_eraser
   end
 
@@ -68,7 +69,7 @@ class LineWithTime
   end
 
   def color
-    @is_eraser ? [255, 255, 255, 0] : PEN_COLOR
+    @is_eraser ? [255, 255, 255, 0] : @pen_color
   end
 end
 
@@ -118,6 +119,9 @@ script do |root|
   end
 end
 
+PEN_COLORS = ["red", "blue", "green", "black"]
+@pen_color_index = 0
+
 App.run do
   if DragDrop.has_new_file_paths
     file_path = DragDrop.get_dropped_file_path
@@ -139,6 +143,11 @@ App.run do
     App.is_stop = false
   end
 
+  if KeyC.down
+    @pen_color_index += 1
+    @pen_color_index = 0 if @pen_color_index >= PEN_COLORS.length
+  end
+
   if dynamic_texture
     if MouseR.pressed || MouseL.pressed
       is_eraser = MouseR.pressed
@@ -147,6 +156,7 @@ App.run do
           App.time,
           Cursor.pos,
           MouseL.down ? Vec2.new(0, 0) : Cursor.delta,
+          PEN_COLORS[@pen_color_index],
           is_eraser
         )
         line.draw(dynamic_texture.image)  # TODO: 書いているときだけ多重描画されている。半透明だと問題が起きる。
