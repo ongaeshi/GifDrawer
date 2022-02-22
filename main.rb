@@ -10,7 +10,7 @@
 # PEN_COLOR = "lime"
 # PEN_COLOR = "yellow"
 # PEN_COLOR = "orange"
-PEN_COLOR = "red"
+# PEN_COLOR = "red"
 # PEN_COLOR = "fuchsia"
 # PEN_COLOR = "purple"
 # PEN_COLOR = "maroon"
@@ -19,8 +19,8 @@ PEN_COLOR = "red"
 # PEN_COLOR = "gray"
 # PEN_COLOR = "black"
 
-# ペンの太さ
-PEN_THICKNESS = 2
+# # ペンの太さ
+# PEN_THICKNESS = 2
 
 # 消しゴムの太さ
 ERASER_THICKNESS = 32
