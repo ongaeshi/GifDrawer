@@ -42,6 +42,12 @@ root_script = nil
 line_with_times = []
 dynamic_texture = nil
 
+PEN_COLORS = ["red", "blue", "green", "black"]
+@pen_color_index = 0
+
+PEN_THICKNESSES = [1, 2, 4, 8]
+@pen_thickness_index = 1
+
 # ---
 class LineWithTime
   attr_reader :time, :point, :delta
@@ -95,7 +101,7 @@ def pen_ui_y
   Window.height - UI_HEIGHT + UI_OFFSET + UI_OFFSET_Y + 2
 end
 
-def draw_pen_rect(color)
+def pen_color_ui
   x = PEN_UI_X
   y = pen_ui_y
   l = PEN_UI_LENGTH
@@ -104,9 +110,9 @@ def draw_pen_rect(color)
   Drawer.rect(x, y, l, l, "gray", 1)
 end
 
-def pen_rect_clicked
+def pen_color_clicked
   return false unless MouseL.down
-  
+
   pos = Cursor.pos
   x = PEN_UI_X
   y = pen_ui_y
@@ -114,6 +120,16 @@ def pen_rect_clicked
 
   x <= pos.x && pos.x <= x + l && 
   y <= pos.y && pos.y <= y + l
+end
+
+def pen_thickness_ui
+  x = PEN_UI_X + PEN_UI_LENGTH + 10
+  y = pen_ui_y
+  l = PEN_UI_LENGTH
+
+  Drawer.rect(x, y, l, l, "white")
+  Drawer.circle(x+l*0.5, y+l*0.5, PEN_THICKNESSES[@pen_thickness_index], "black")
+  Drawer.rect(x, y, l, l, "gray", 1)
 end
 
 # ---
@@ -150,15 +166,9 @@ script do |root|
   end
 end
 
-PEN_COLORS = ["red", "blue", "green", "black"]
-@pen_color_index = 0
-
-UI_OFFSET = 10
-UI_OFFSET_Y = 60
-UI_HEIGHT = 60 + UI_OFFSET_Y
-
 App.draw_ui do
-  draw_pen_rect(PEN_COLORS[@pen_color_index])
+  pen_color_ui
+  pen_thickness_ui
 end
 
 App.run do
@@ -182,7 +192,7 @@ App.run do
     App.is_stop = false
   end
 
-  if KeyC.down || pen_rect_clicked
+  if KeyC.down || pen_color_clicked
     @pen_color_index += 1
     @pen_color_index = 0 if @pen_color_index >= PEN_COLORS.length
   end
