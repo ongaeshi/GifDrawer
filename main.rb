@@ -86,9 +86,9 @@ def draw_mosaic(clip, color1, color2)
 end
 
 def draw_pen_rect(x, y, color)
-  length = 30
+  length = 32
   Drawer.rect(x, y, length, length, PEN_COLORS[@pen_color_index])
-  Drawer.rect(x, y, length, length, "black", 1)
+  Drawer.rect(x, y, length, length, "gray", 1)
 end
 
 # ---
@@ -128,6 +128,15 @@ end
 PEN_COLORS = ["red", "blue", "green", "black"]
 @pen_color_index = 0
 
+UI_OFFSET = 10
+UI_OFFSET_Y = 60
+UI_HEIGHT = 60 + UI_OFFSET_Y
+
+App.draw_ui do
+  ui_pos_y = Window.height - UI_HEIGHT
+  draw_pen_rect(150, ui_pos_y + UI_OFFSET + UI_OFFSET_Y, PEN_COLORS[@pen_color_index])
+end
+
 App.run do
   if DragDrop.has_new_file_paths
     file_path = DragDrop.get_dropped_file_path
@@ -153,8 +162,6 @@ App.run do
     @pen_color_index += 1
     @pen_color_index = 0 if @pen_color_index >= PEN_COLORS.length
   end
-
-  draw_pen_rect(100, 300, PEN_COLORS[@pen_color_index])
 
   if dynamic_texture
     if MouseR.pressed || MouseL.pressed
