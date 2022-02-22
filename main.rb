@@ -85,6 +85,12 @@ def draw_mosaic(clip, color1, color2)
   end
 end
 
+def draw_pen_rect(x, y, color)
+  length = 30
+  Drawer.rect(x, y, length, length, PEN_COLORS[@pen_color_index])
+  Drawer.rect(x, y, length, length, "black", 1)
+end
+
 # ---
 App.window_size(640, 360)
 App.end_time = DEFAULT_END_TIME
@@ -148,6 +154,8 @@ App.run do
     @pen_color_index = 0 if @pen_color_index >= PEN_COLORS.length
   end
 
+  draw_pen_rect(100, 300, PEN_COLORS[@pen_color_index])
+
   if dynamic_texture
     if MouseR.pressed || MouseL.pressed
       is_eraser = MouseR.pressed
@@ -159,7 +167,7 @@ App.run do
           PEN_COLORS[@pen_color_index],
           is_eraser
         )
-        line.draw(dynamic_texture.image)  # TODO: 書いているときだけ多重描画されている。半透明だと問題が起きる。
+        line.draw(dynamic_texture.image) # TODO: 書いているときだけ多重描画されている。半透明だと問題が起きる。
         index = line_with_times.bsearch_index { |e| line.time < e.time }
         if index.nil?
           line_with_times.push(line)
