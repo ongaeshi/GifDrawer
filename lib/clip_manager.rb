@@ -89,7 +89,7 @@ module Clip
 
         @time, @is_stop, @is_loop, @is_hidden, @is_slow = timeline_ui(@time, @end_time, @is_stop, @is_loop, @is_hidden, @is_slow)
 
-        @draw_ui.call if @draw_ui
+        @draw_ui.call if @draw_ui && !@is_hidden
 
         @min_delta_rate = @is_slow ? @slow_delta_rate : 1
 
