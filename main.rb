@@ -85,10 +85,35 @@ def draw_mosaic(clip, color1, color2)
   end
 end
 
-def draw_pen_rect(x, y, color)
-  length = 32
-  Drawer.rect(x, y, length, length, PEN_COLORS[@pen_color_index])
-  Drawer.rect(x, y, length, length, "gray", 1)
+PEN_UI_X = 150
+PEN_UI_LENGTH = 32
+UI_OFFSET = 10
+UI_OFFSET_Y = 60
+UI_HEIGHT = 60 + UI_OFFSET_Y
+
+def pen_ui_y
+  Window.height - UI_HEIGHT + UI_OFFSET + UI_OFFSET_Y + 2
+end
+
+def draw_pen_rect(color)
+  x = PEN_UI_X
+  y = pen_ui_y
+  l = PEN_UI_LENGTH
+
+  Drawer.rect(x, y, l, l, PEN_COLORS[@pen_color_index])
+  Drawer.rect(x, y, l, l, "gray", 1)
+end
+
+def pen_rect_clicked
+  return false unless MouseL.down
+  
+  pos = Cursor.pos
+  x = PEN_UI_X
+  y = pen_ui_y
+  l = PEN_UI_LENGTH
+
+  x <= pos.x && pos.x <= x + l && 
+  y <= pos.y && pos.y <= y + l
 end
 
 # ---
@@ -133,8 +158,7 @@ UI_OFFSET_Y = 60
 UI_HEIGHT = 60 + UI_OFFSET_Y
 
 App.draw_ui do
-  ui_pos_y = Window.height - UI_HEIGHT
-  draw_pen_rect(150, ui_pos_y + UI_OFFSET + UI_OFFSET_Y, PEN_COLORS[@pen_color_index])
+  draw_pen_rect(PEN_COLORS[@pen_color_index])
 end
 
 App.run do
@@ -158,7 +182,7 @@ App.run do
     App.is_stop = false
   end
 
-  if KeyC.down
+  if KeyC.down || pen_rect_clicked
     @pen_color_index += 1
     @pen_color_index = 0 if @pen_color_index >= PEN_COLORS.length
   end
