@@ -52,11 +52,12 @@ PEN_THICKNESSES = [1, 2, 4, 8]
 class LineWithTime
   attr_reader :time, :point, :delta
 
-  def initialize(time, point, delta, pen_color, is_eraser = false)
+  def initialize(time, point, delta, pen_color, pen_thickness, is_eraser = false)
     @time = time
     @point = point
     @delta = delta
     @pen_color = pen_color
+    @pen_thickness = pen_thickness
     @is_eraser = is_eraser
   end
 
@@ -71,7 +72,7 @@ class LineWithTime
   end
 
   def thickness
-    @is_eraser ? ERASER_THICKNESS : PEN_THICKNESS
+    @is_eraser ? ERASER_THICKNESS : @pen_thickness
   end
 
   def color
@@ -223,6 +224,7 @@ App.run do
           Cursor.pos,
           MouseL.down ? Vec2.new(0, 0) : Cursor.delta,
           PEN_COLORS[@pen_color_index],
+          PEN_THICKNESSES[@pen_thickness_index],
           is_eraser
         )
         line.draw(dynamic_texture.image) # TODO: 書いているときだけ多重描画されている。半透明だと問題が起きる。
