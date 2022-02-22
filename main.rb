@@ -132,6 +132,18 @@ def pen_thickness_ui
   Drawer.rect(x, y, l, l, "gray", 1)
 end
 
+def pen_thickness_clicked
+  return false unless MouseL.down
+
+  pos = Cursor.pos
+  x = PEN_UI_X + PEN_UI_LENGTH + 10
+  y = pen_ui_y
+  l = PEN_UI_LENGTH
+
+  x <= pos.x && pos.x <= x + l && 
+  y <= pos.y && pos.y <= y + l
+end
+
 # ---
 App.window_size(640, 360)
 App.end_time = DEFAULT_END_TIME
@@ -195,6 +207,11 @@ App.run do
   if KeyC.down || pen_color_clicked
     @pen_color_index += 1
     @pen_color_index = 0 if @pen_color_index >= PEN_COLORS.length
+  end
+
+  if pen_thickness_clicked # TODO: KeyT.down
+    @pen_thickness_index += 1
+    @pen_thickness_index = 0 if @pen_thickness_index >= PEN_THICKNESSES.length
   end
 
   if dynamic_texture
