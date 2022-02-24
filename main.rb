@@ -1,32 +1,18 @@
 # 調整用パラメータ
 
 # ペンの色
-# PEN_COLOR = "navy"
-# PEN_COLOR = "blue"
-# PEN_COLOR = "aqua"
-# PEN_COLOR = "teal"
-# PEN_COLOR = "olive"
-# PEN_COLOR = "green"
-# PEN_COLOR = "lime"
-# PEN_COLOR = "yellow"
-# PEN_COLOR = "orange"
-# PEN_COLOR = "red"
-# PEN_COLOR = "fuchsia"
-# PEN_COLOR = "purple"
-# PEN_COLOR = "maroon"
-# PEN_COLOR = "white"
-# PEN_COLOR = "silver"
-# PEN_COLOR = "gray"
-# PEN_COLOR = "black"
+# "navy", "blue", "aqua", "teal", "olive", "green", "lime", "yellow", "orange"
+# "red", "fuchsia", "purple", "maroon", "white", "silver", "gray", "black"
+PEN_COLORS = ["red", "blue", "green", "black"]
 
-# # ペンの太さ
-# PEN_THICKNESS = 2
+# ペンの太さ
+PEN_THICKNESSES = [1, 2, 4, 8]
 
 # 消しゴムの太さ
 ERASER_THICKNESS = 32
 
 # gifアニメが未設定のときの終了時間
-DEFAULT_END_TIME = 5
+DEFAULT_END_TIME = 3
 
 # コマ送りの再生レート(1が60fps、3で20fps)
 FRAME_ADVANCE_RATE = 3
@@ -45,10 +31,8 @@ root_script = nil
 line_with_times = []
 dynamic_texture = nil
 
-PEN_COLORS = ["red", "blue", "green", "black"]
 @pen_color_index = 0
 
-PEN_THICKNESSES = [1, 2, 4, 8]
 @pen_thickness_index = 1
 
 # ---
