@@ -28,6 +28,9 @@ ERASER_THICKNESS = 32
 # gifアニメが未設定のときの終了時間
 DEFAULT_END_TIME = 5
 
+# コマ送りの再生レート(1が60fps、3で20fps)
+FRAME_ADVANCE_RATE = 3
+
 # スローボタン(🐢)を押したときの再生レート(小さいほど遅くなる)
 CLIP_MANAGER_SLOW_DELTA_RATE = 0.25
 
@@ -184,7 +187,7 @@ App.draw_ui do
   pen_thickness_ui
 end
 
-App.run do
+App.run(FRAME_ADVANCE_RATE) do
   if DragDrop.has_new_file_paths
     file_path = DragDrop.get_dropped_file_path
 

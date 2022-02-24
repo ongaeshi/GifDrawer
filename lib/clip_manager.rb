@@ -53,7 +53,7 @@ module Clip
       @draw_ui = block
     end
 
-    def run(&block)
+    def run(frame_advance_rate, &block)
       # Calculate first delta time
       delta_time = if @start_time > 0 || @is_stop
         @start_time
@@ -87,8 +87,8 @@ module Clip
         prev_time = @time
         prev_hidden = @is_hidden
 
-        @time, @is_stop, @is_loop, @is_hidden, @is_slow = timeline_ui(@time, @end_time, @is_stop, @is_loop, @is_hidden, @is_slow)
-
+        @time, @is_stop, @is_loop, @is_hidden, @is_slow = timeline_ui(@time, @end_time, @is_stop, @is_loop, @is_hidden, @is_slow, frame_advance_rate)
+        
         @draw_ui.call if @draw_ui && !@is_hidden
 
         @min_delta_rate = @is_slow ? @slow_delta_rate : 1
