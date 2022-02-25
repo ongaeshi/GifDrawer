@@ -197,7 +197,7 @@ App.run(FRAME_ADVANCE_RATE) do
     @pen_color_index = 0 if @pen_color_index >= PEN_COLORS.length
   end
 
-  if pen_thickness_clicked # TODO: KeyT.down
+  if KeyT.down || pen_thickness_clicked
     @pen_thickness_index += 1
     @pen_thickness_index = 0 if @pen_thickness_index >= PEN_THICKNESSES.length
   end
