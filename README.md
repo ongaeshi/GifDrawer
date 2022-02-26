@@ -11,7 +11,9 @@ $ git clone https://github.com/ongaeshi/GifDrawer.git
 
 ## 使い方
 ### 1. 線を書く
-マウス左ドラッグ
+マウス左クリックしてドラッグで線を書く。
+
+![draw-line.gif](resource/draw-line.gif)
 
 ### 2. 消しゴム
 マウス右ドラッグ
