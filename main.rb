@@ -24,6 +24,8 @@ CLIP_MANAGER_SLOW_DELTA_RATE = 0.25
 CLIP_MANAGER_IS_STOP = true # 起動時に再生停止
 require "clip"
 
+Window.set_title("GifDrawer v0.2")
+
 SCALE = 1
 gif_reader = nil
 texture = nil
