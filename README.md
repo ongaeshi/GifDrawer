@@ -11,15 +11,23 @@ $ git clone https://github.com/ongaeshi/GifDrawer.git
 
 ## 使い方
 ### 1. 線を書く
-マウス左クリックしてドラッグで線を書く。
+マウス左クリックで線を書く。
 
 ![draw-line.gif](resource/draw-line.gif)
 
 ### 2. 消しゴム
-マウス右ドラッグ
+マウス右クリックで消しゴム。
+
+![](resource/gif-drawer-eraser.gif)
 
 ### 3. 書いた線がアニメーションに
-コマ送りを活用するとアニメーションが書きやすい
+コマ送りを使うとアニメーションが作りやすい。
+
+![](resource/gif-drawer-frame-by-frame.gif)
+
+完成品。
+
+![](resource/gif-drawer-hello.gif)
 
 ### 4. gifアニメや画像を背景にする
 ドラッグ＆ドロップ
