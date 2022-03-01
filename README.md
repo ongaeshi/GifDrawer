@@ -1,6 +1,8 @@
 # GifDrawer
 GIFアニメーションにお絵描き。
 
+![](resource/gif-drawer-intro.gif)
+
 ## インストール
 このレポジトリをgit cloneすればすぐに使えます。  
 または[tags](https://github.com/ongaeshi/GifDrawer/tags)から最新をダウンロード。
@@ -30,7 +32,10 @@ $ git clone https://github.com/ongaeshi/GifDrawer.git
 ![](resource/gif-drawer-hello.gif)
 
 ### 4. gifアニメや画像を背景にする
-ドラッグ＆ドロップ
+gifアニメや画像ファイル(png, jpg)をドラッグ＆ドロップすると背景になります。  
+アニメーションと連動したお絵描きを付けることができます。
+
+![](resource/gif-drawer-drag-and-drop.gif)
 
 ### 5. ペンの色や太さの変更
 
