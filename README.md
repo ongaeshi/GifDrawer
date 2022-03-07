@@ -48,7 +48,14 @@ gifアニメや画像ファイル(png, jpg)をドラッグ＆ドロップする�
 ![](resource/gif-drawer-save.gif)
 
 ### 7. 作成したアニメーションの圧縮
-ffmpegが必要です
+GifDrawerフォルダ直下にあるbatファイルに.gifをドラッグ＆ドロップしてください。
+
+※ PATHの通った場所にffmpeg.exeが必要です。
+
+|  ファイル名  | 説明  | 出力ファイル名 |
+| ---- | ---- | ---- |
+|  GifCompress.bat    |  解像度を維持したままファイルサイズを圧縮  | INPUT.compressed.gif |
+|  GifCompressShrink.bat        | 横幅を320pxに縮小しながらファイルサイズを圧縮  | INPUT.compshrinked.gif |
 
 ## キーボードショートカット
 |  キー  | 説明  |
