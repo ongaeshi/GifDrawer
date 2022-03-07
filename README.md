@@ -38,6 +38,9 @@ gifアニメや画像ファイル(png, jpg)をドラッグ＆ドロップする�
 ![](resource/gif-drawer-drag-and-drop.gif)
 
 ### 5. ペンの色や太さの変更
+クリックすると色や太さを変更できます。
+
+![](resource/gif-drawer-pen.gif)
 
 ### 6. アニメーションの保存
 gifアニメで保存できます
