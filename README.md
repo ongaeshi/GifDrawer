@@ -43,7 +43,9 @@ gifアニメや画像ファイル(png, jpg)をドラッグ＆ドロップする�
 ![](resource/gif-drawer-pen.gif)
 
 ### 6. アニメーションの保存
-gifアニメで保存できます
+作成したアニメーションはgifアニメ形式で保存できます。
+
+![](resource/gif-drawer-save.gif)
 
 ### 7. 作成したアニメーションの圧縮
 ffmpegが必要です
