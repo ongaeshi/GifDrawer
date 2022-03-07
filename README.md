@@ -57,16 +57,19 @@ GifDrawerフォルダ直下にあるbatファイルに.gifをドラッグ＆ド�
 |  GifCompress.bat    |  解像度を維持したままファイルサイズを圧縮  | INPUT.compressed.gif |
 |  GifCompressShrink.bat        | 横幅を320pxに縮小しながらファイルサイズを圧縮  | INPUT.compshrinked.gif |
 
-## キーボードショートカット
+## 8. キーボードショートカット
 |  キー  | 説明  |
 | ---- | ---- |
 |  SPACE    |  PLAY/STOP  |
 |  →        |  TIME++  |
-|  Ctrl + → |  TIME = end_time  |
 |  ←        |  TIME--   |
+|  Ctrl + → |  TIME = end_time  |
 |  Ctrl + ← |  TIME = 0  |
 |  C        |  CHANGE COLOR  |
 |  T        |  CHANGE THICKNESS  |
+|  Ctrl + S | SAVE |
 |  S        | SLOW PLAY |
 |  F10      | LOOP TOGGLE |
 |  F11      | UI TOGGLE |
+
+![](resource/gif-drawer-hotkey.gif)
